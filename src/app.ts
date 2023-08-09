@@ -1,10 +1,10 @@
 import express from "express";
-import { config } from "@constants";
+import { configInfo } from "@config";
 import loaders from "@loaders";
 
 async function startServer() {
     const app = express();
-    const port = config.PORT;
+    const port = configInfo.PORT;
 
     await loaders.init(app);
 

@@ -1,4 +1,4 @@
-import { errorInfo } from "@constants";
+import { errorInfo } from "@config";
 import { Schema } from "mongoose";
 
 // 컬럼 값 타입 종류

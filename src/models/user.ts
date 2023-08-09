@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { fieldCreatedAt, fieldDeletedAt, fieldUpdatedAt } from "./baseEntity";
-import { errorInfo } from "@constants";
+import { errorInfo } from "@config";
 
 const schema = new Schema({
     username: {

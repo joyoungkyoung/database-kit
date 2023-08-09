@@ -5,7 +5,7 @@
         "rootDir": "./src",
         "baseUrl": "./src",
         "paths": {
-            "@constants": ["./constants/index"],
+            "@config": ["./config/index"],
             "@db/*": ["./db/*"],
             "@controllers/*": ["./controllers/*"],
             "@models/*": ["./models/*"],

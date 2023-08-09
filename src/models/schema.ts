@@ -1,4 +1,4 @@
-import { errorInfo } from "@constants";
+import { errorInfo } from "@config";
 import mongoose, { Schema } from "mongoose";
 import { fieldCreatedAt, fieldDeletedAt, fieldUpdatedAt } from "./baseEntity";
 
