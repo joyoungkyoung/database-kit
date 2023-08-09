@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "rootDir": "./src",
+        "baseUrl": "./src",
+        "paths": {
+            "@constants": ["./constants/index"],
+            "@db/*": ["./db/*"],
+            "@controllers/*": ["./controllers/*"],
+            "@models/*": ["./models/*"],
+            "@services": ["./services/index"],
+            "@loaders": ["./loaders/index"],
+            "@routes": ["./routes/index"]
+        },
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+
+        // typedi 관련 설정
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    }
+}
