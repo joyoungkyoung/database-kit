@@ -13,4 +13,6 @@ const schema = new Schema({
     ...fieldUpdatedAt,
 });
 
-export default mongoose.model("SchemaValue", schema);
+const SchemaValueModel = mongoose.model("SchemaValue", schema);
+
+export default SchemaValueModel;

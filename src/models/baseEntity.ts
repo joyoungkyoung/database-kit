@@ -16,11 +16,11 @@ export const fieldCreatedAt = {
 // 수정자, 수정일
 export const fieldUpdatedAt = {
     updatedBy: { type: Schema.Types.ObjectId, require: false },
-    updatedAt: { type: Date, require: false, default: Date.now },
+    updatedAt: { type: Date, require: false },
 };
 
 // 삭제자, 삭제일
 export const fieldDeletedAt = {
     deletedBy: { type: Schema.Types.ObjectId, require: false },
-    deletedAt: { type: Date, require: false, default: Date.now },
+    deletedAt: { type: Date, require: false },
 };

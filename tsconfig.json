@@ -8,7 +8,7 @@
             "@config": ["./config/index"],
             "@db/*": ["./db/*"],
             "@controllers/*": ["./controllers/*"],
-            "@models/*": ["./models/*"],
+            "@models": ["./models/index"],
             "@services": ["./services/index"],
             "@loaders": ["./loaders/index"],
             "@routes": ["./routes/index"]

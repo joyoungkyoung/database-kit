@@ -1,3 +1,4 @@
+import AuthService from "./authService";
 import SchemaService from "./schemaService";
 
-export { SchemaService };
+export { AuthService, SchemaService };

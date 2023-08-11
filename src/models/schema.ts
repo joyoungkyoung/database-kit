@@ -18,4 +18,6 @@ const schema = new Schema({
     ...fieldDeletedAt,
 });
 
-export default mongoose.model("Schema", schema);
+const SchemaModel = mongoose.model("Schema", schema);
+
+export default SchemaModel;

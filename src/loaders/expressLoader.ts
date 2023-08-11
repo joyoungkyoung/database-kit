@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import router from "api/routes";
-import 'reflect-metadata'; // typedi 설정
+import "reflect-metadata"; // typedi 설정
 
 type StaticOrigin = boolean | string | RegExp | (boolean | string | RegExp)[];
 
@@ -19,12 +19,12 @@ const corsOptions = {
 };
 
 export default (app: Express) => {
-    app.use(cors(corsOptions));
+    app.use(cors());
     app.use(morgan("dev"));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
-    app.use("/api/v1/", router)
+    app.use("/api/v1", router);
 
     return app;
 };
