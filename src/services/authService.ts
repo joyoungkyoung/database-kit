@@ -1,4 +1,5 @@
 import { Service } from "typedi";
+import { makeToken } from "@middlewares/jsonwebtoken";
 import { UserModel } from "@models";
 import { CustomException, errorInfo } from "@config";
 
@@ -27,6 +28,15 @@ export default class AuthService {
         const isMatch = await findUser.comparePassword(password);
         if (!isMatch) throw new CustomException(errorInfo.WRONG_USERNAME_OR_PASSWORD);
 
-        return findUser && isMatch;
+        const isLoginSuccess = findUser && isMatch;
+        if (!isLoginSuccess) return null;
+
+        return {
+            username: findUser.username,
+            accessToken: makeToken({
+                id: findUser.id,
+                username: findUser.username,
+            }),
+        };
     }
 }

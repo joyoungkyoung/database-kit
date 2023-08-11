@@ -11,7 +11,8 @@
             "@models": ["./models/index"],
             "@services": ["./services/index"],
             "@loaders": ["./loaders/index"],
-            "@routes": ["./routes/index"]
+            "@routes": ["./api/routes/index"],
+            "@middlewares/*": ["./api/middlewares/*"]
         },
         "outDir": "./dist",
         "esModuleInterop": true,

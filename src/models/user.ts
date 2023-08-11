@@ -18,20 +18,23 @@ interface IUserDocument extends IUser, Document {
     comparePassword: (password: string) => Promise<boolean>;
 }
 
-const schema = new Schema({
-    username: {
-        type: String,
-        require: [true, errorInfo.formatMsg("INVALID_REQUIRE_PARAMETER", ["username"])],
-        unique: true,
+const schema = new Schema(
+    {
+        username: {
+            type: String,
+            require: [true, errorInfo.formatMsg("INVALID_REQUIRE_PARAMETER", ["username"])],
+            unique: true,
+        },
+        password: {
+            type: String,
+            require: [true, errorInfo.formatMsg("INVALID_REQUIRE_PARAMETER", ["password"])],
+        },
+        ...fieldCreatedAt,
+        ...fieldUpdatedAt,
+        ...fieldDeletedAt,
     },
-    password: {
-        type: String,
-        require: [true, errorInfo.formatMsg("INVALID_REQUIRE_PARAMETER", ["password"])],
-    },
-    ...fieldCreatedAt,
-    ...fieldUpdatedAt,
-    ...fieldDeletedAt,
-});
+    { versionKey: false }
+);
 
 schema.pre("save", function (this, next) {
     const user = this;
