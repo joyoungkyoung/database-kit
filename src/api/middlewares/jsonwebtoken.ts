@@ -16,7 +16,8 @@ export const verifyToken = () => {
                 return send401UnAuthorized(res);
             }
 
-            const verify = jwt.verify(token, secretKey);
+            const verify: any = jwt.verify(token, secretKey);
+            req.userId = verify.id;
             next();
         } catch (e) {
             send401UnAuthorized(res);

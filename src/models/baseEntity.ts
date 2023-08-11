@@ -2,7 +2,7 @@ import { errorInfo } from "@config";
 import { Schema } from "mongoose";
 
 // 컬럼 값 타입 종류
-export const valueTypeArr = ["Number", "String", "Image", "Boolean"];
+export const valueTypeArr = ["Number", "String", "Image", "Boolean"] as const;
 
 // 생성자, 생성일
 export const fieldCreatedAt = {
