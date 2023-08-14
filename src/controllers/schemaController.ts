@@ -27,13 +27,32 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const updateSchema = async (req: Request, res: Response) => {
+const addRow = async (req: Request, res: Response, next: NextFunction) => {
+    const dto = req.body;
     const schemaService = Container.get(SchemaService);
+
+    try {
+        const response = await schemaService.addRow(dto);
+        return send200(res, response)
+    } catch (e) {
+        next(e);
+    }
+};
+
+const updateSchema = async (req: Request, res: Response, next: NextFunction) => {
+    const dto = { ...req.body, userId: req.userId };
+    const schemaService = Container.get(SchemaService);
+
+    try {
+        const response = await schemaService.update(dto);
+        return send200(res, response);
+    } catch (e: any) {
+        next(e);
+    }
 };
 
 const removeSchema = async (req: Request, res: Response, next: NextFunction) => {
     const dto = { ...req.body, userId: req.userId };
-
     const schemaService = Container.get(SchemaService);
 
     try {
@@ -45,8 +64,7 @@ const removeSchema = async (req: Request, res: Response, next: NextFunction) => 
 };
 
 const deleteSchema = async (req: Request, res: Response, next: NextFunction) => {
-    const dto = { ...req.body, userId: req.userId };
-    console.log(req);
+    const dto = req.body;
     const schemaService = Container.get(SchemaService);
 
     try {
@@ -60,6 +78,7 @@ const deleteSchema = async (req: Request, res: Response, next: NextFunction) => 
 export default {
     getList,
     create,
+    addRow,
     updateSchema,
     removeSchema,
     deleteSchema,

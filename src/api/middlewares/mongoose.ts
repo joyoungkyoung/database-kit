@@ -7,7 +7,7 @@ export const withTransaction = async (method: mongoose.mongo.WithTransactionCall
     try {
         session.startTransaction();
 
-        const result: any = method(session);
+        const result: any = await method(session);
         await session.commitTransaction();
 
         isCommitted = true;

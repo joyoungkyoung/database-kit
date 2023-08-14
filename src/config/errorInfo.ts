@@ -5,6 +5,9 @@ type ErrorKeyType =
     | "WRONG_USERNAME_OR_PASSWORD"
     | "DUPLICATED_SCHEMA_NAME"
     | "DUPLICATED_SCHEMA_COLUMNS_NAME"
+    | "INVALID_NUMBER_CAST"
+    | "INVALID_STRING_CAST"
+    | "EMPTY_COLUMN_VALUES"
     | "INVALID_PARAMETER_STRING_LEGNTH"
     | "INVALID_REQUIRE_PARAMETER";
 
@@ -19,6 +22,9 @@ const errorInfo: {
     // 20000 : Schema
     DUPLICATED_SCHEMA_NAME: { code: "20000", message: "schema name is duplicated" },
     DUPLICATED_SCHEMA_COLUMNS_NAME: { code: "20001", message: "schema column name is duplicated" },
+    INVALID_NUMBER_CAST: { code: "20002", message: "invalid number type casting" },
+    INVALID_STRING_CAST: { code: "20003", message: "invalid string type casting" },
+    EMPTY_COLUMN_VALUES: { code: "20004", message: "this column's values are empty." },
     // 90000 : Common
     INVALID_PARAMETER_STRING_LEGNTH: { code: "90000", message: "name can not be more than {0} characters" },
     INVALID_REQUIRE_PARAMETER: { code: "90001", message: "must provide : {0}" },
