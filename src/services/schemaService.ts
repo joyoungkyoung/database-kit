@@ -13,8 +13,8 @@ export default class SchemaService {
 
     /**
      * 스키마 리스트 조회
-     * @param dto 
-     * @returns 
+     * @param dto
+     * @returns
      */
     public async getList(dto: { sort?: number }) {
         const { sort } = dto;
@@ -34,8 +34,8 @@ export default class SchemaService {
 
     /**
      * 스키마 생성
-     * @param dto 
-     * @returns 
+     * @param dto
+     * @returns
      */
     public async create(dto: {
         name: string;
@@ -66,8 +66,8 @@ export default class SchemaService {
 
     /**
      * 스키마 값 row 추가
-     * @param dto 
-     * @returns 
+     * @param dto
+     * @returns
      */
     public async addRow(dto: { schemaId: string; values: { columnId: string; value: boolean | number | string }[] }) {
         const { schemaId, values } = dto;
@@ -83,9 +83,21 @@ export default class SchemaService {
     }
 
     /**
+     * 스키마 값 상세 정보 반환
+     * @param dto
+     */
+    public async getRow(dto: { schemaValueId: string }) {
+        const { schemaValueId } = dto;
+
+        const result = await SchemaValueModel.findOne({ _id: new ObjectId(schemaValueId) });
+
+        return result;
+    }
+
+    /**
      * 값 타입 별 디폴트 반환
-     * @param type 
-     * @returns 
+     * @param type
+     * @returns
      */
     getDefault(type?: ValueType) {
         if (type === "Boolean") return false;
@@ -96,7 +108,7 @@ export default class SchemaService {
 
     /**
      * 스키마 정보 수정
-     * @param dto 
+     * @param dto
      */
     public async update(dto: {
         id: string;
@@ -242,7 +254,7 @@ export default class SchemaService {
 
     /**
      * 스키마 삭제
-     * @param dto 
+     * @param dto
      */
     public async remove(dto: { userId: string; idList: string[] }) {
         const { userId, idList } = dto;
@@ -257,7 +269,7 @@ export default class SchemaService {
 
     /**
      * 스키마 영구삭제
-     * @param dto 
+     * @param dto
      */
     public async delete(dto: { idList: string[] }) {
         const { idList } = dto;

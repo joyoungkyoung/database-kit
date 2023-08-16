@@ -1,6 +1,6 @@
 import { SchemaService } from "@services";
 import { send200 } from "config/response";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, response } from "express";
 import Container from "typedi";
 
 const getList = async (req: Request, res: Response, next: NextFunction) => {
@@ -33,7 +33,19 @@ const addRow = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const response = await schemaService.addRow(dto);
-        return send200(res, response)
+        return send200(res, response);
+    } catch (e) {
+        next(e);
+    }
+};
+
+const getRow = async (req: Request, res: Response, next: NextFunction) => {
+    const dto = { schemaValueId: req.query.schemaValueId as string };
+    const schemaService = Container.get(SchemaService);
+
+    try {
+        const response = await schemaService.getRow(dto);
+        return send200(res, response);
     } catch (e) {
         next(e);
     }
@@ -79,6 +91,7 @@ export default {
     getList,
     create,
     addRow,
+    getRow,
     updateSchema,
     removeSchema,
     deleteSchema,
