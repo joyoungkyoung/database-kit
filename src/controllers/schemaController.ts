@@ -51,6 +51,18 @@ const getRow = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+const updateRow = async (req: Request, res: Response, next: NextFunction) => {
+    const dto = req.body;
+    const schemaService = Container.get(SchemaService);
+
+    try {
+        const response = await schemaService.updateRow(dto);
+        return send200(res, response);
+    } catch (e) {
+        next(e);
+    }
+};
+
 const updateSchema = async (req: Request, res: Response, next: NextFunction) => {
     const dto = { ...req.body, userId: req.userId };
     const schemaService = Container.get(SchemaService);
@@ -92,6 +104,7 @@ export default {
     create,
     addRow,
     getRow,
+    updateRow,
     updateSchema,
     removeSchema,
     deleteSchema,

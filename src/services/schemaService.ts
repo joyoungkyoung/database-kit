@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 const ObjectId = mongoose.Types.ObjectId;
 const DocumentArray = mongoose.Types.DocumentArray;
+const SubDocument = mongoose.Types.Subdocument;
 
 @Service()
 export default class SchemaService {
@@ -92,6 +93,63 @@ export default class SchemaService {
         const result = await SchemaValueModel.findOne({ _id: new ObjectId(schemaValueId) });
 
         return result;
+    }
+
+    /**
+     * 스키마 값 수정
+     * @param dto
+     */
+    public async updateRow(dto: {
+        schemaId: string;
+        schemaValueId: string;
+        values: { columnId: string; value: boolean | number | string }[];
+    }) {
+        const { schemaId, schemaValueId, values } = dto;
+
+        const findSchemaColumn = await SchemaColumnModel.findOne({ schemaId: new ObjectId(schemaId) });
+        const findSchemaValue = await SchemaValueModel.findOne({ _id: new ObjectId(schemaValueId) });
+        if (!findSchemaColumn || !findSchemaValue) throw new CustomException(errorInfo.EMPTY_COLUMN_VALUES);
+
+        const columns: { [k: string]: ValueType | undefined } = {};
+        findSchemaColumn.info.forEach((c) => (columns[String(c._id)] = c.type));
+
+        const fValues = values.filter((v) => {
+            const type = columns[v.columnId];
+            return !type || !this.getType(v.value)?.includes(type);
+        });
+
+        if (fValues?.length) throw new CustomException(errorInfo.INVALID_TYPE);
+
+        const data: any[] = [...findSchemaValue.values];
+        values.forEach((v) => {
+            const idx = data.findIndex((d) => d.columnId?.toString() === v.columnId);
+            const value = this.parseType(columns[v.columnId]!, v.value);
+            if (v.value != value) throw new CustomException(errorInfo.INVALID_TYPE);
+
+            const doc = { columnId: new ObjectId(v.columnId), value };
+
+            if (idx === -1) data.push(doc);
+            else data[idx] = doc;
+        });
+
+        findSchemaValue.values = new DocumentArray(data);
+        const result = await findSchemaValue.save();
+
+        return result;
+    }
+
+    getType(value?: any): ValueType[] {
+        if (typeof value === "boolean") return ["Boolean"];
+        if (typeof value === "number") return ["Number"];
+        if (typeof value === "string") return ["Number", "String", "Image"];
+        return [];
+    }
+
+    parseType(type: ValueType, value: any) {
+        if (type === "Boolean") return Boolean(value);
+        if (type === "Number") return Number(value);
+        if (type === "String" || type === "Image") return String(value);
+        return value;
     }
 
     /**

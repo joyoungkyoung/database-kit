@@ -8,6 +8,8 @@ type ErrorKeyType =
     | "INVALID_NUMBER_CAST"
     | "INVALID_STRING_CAST"
     | "EMPTY_COLUMN_VALUES"
+    | "INVALID_TYPE"
+    | "INVALID_COLUMN_VALUES"
     | "INVALID_PARAMETER_STRING_LEGNTH"
     | "INVALID_REQUIRE_PARAMETER";
 
@@ -25,6 +27,8 @@ const errorInfo: {
     INVALID_NUMBER_CAST: { code: "20002", message: "invalid number type casting" },
     INVALID_STRING_CAST: { code: "20003", message: "invalid string type casting" },
     EMPTY_COLUMN_VALUES: { code: "20004", message: "this column's values are empty." },
+    INVALID_TYPE: { code: "20005", message: "type is invalid." },
+    INVALID_COLUMN_VALUES: { code: "20006", message: " this column's values are invalid." },
     // 90000 : Common
     INVALID_PARAMETER_STRING_LEGNTH: { code: "90000", message: "name can not be more than {0} characters" },
     INVALID_REQUIRE_PARAMETER: { code: "90001", message: "must provide : {0}" },
