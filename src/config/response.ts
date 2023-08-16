@@ -6,6 +6,7 @@ export const send200 = (res: Response, data?: any) => {
 };
 
 export const send400Error = (res: Response, error: CustomException) => {
+    console.info(`===> ${error.code}: ${error.message}`);
     return res.status(400).send({ code: error.code, message: error.message });
 };
 
@@ -18,5 +19,6 @@ export const send403AccessDenied = (res: Response) => {
 };
 
 export const send500Error = (res: Response, error: any) => {
+    console.error(error);
     return res.status(500).send({ code: 500, error: error?.toString() });
 };
