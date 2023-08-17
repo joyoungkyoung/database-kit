@@ -1,4 +1,6 @@
 <script>
+import { AuthService } from '@/apis'
+
 export default {
   data: () => ({
     username: '',
@@ -7,6 +9,13 @@ export default {
   methods: {
     rules(name) {
       return [(value) => (value ? true : `You must enter a ${name}`)]
+    },
+    async reqLogin() {
+      const res = await AuthService.login(this.username, this.password)
+      if (res.code === 200 && res.data) {
+        console.log(res.data.accessToken)
+        console.log(res.data.username)
+      }
     }
   }
 }
@@ -22,7 +31,7 @@ export default {
         label="password"
         type="password"
       />
-      <v-btn type="submit" block class="mt-2">Submit</v-btn>
+      <v-btn type="submit" block class="mt-2" @click="this.reqLogin()">Login</v-btn>
     </v-form>
   </v-sheet>
 </template>

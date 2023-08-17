@@ -2,7 +2,7 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import router from "api/routes";
-import { CustomException } from "@config";
+import { CustomException, configInfo } from "@config";
 import { send400Error, send500Error } from "config/response";
 import "reflect-metadata"; // typedi 설정
 
@@ -26,7 +26,7 @@ export default (app: Express) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
-    app.use("/api/v1", router);
+    app.use(configInfo.API_VER, router);
 
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         if (err instanceof CustomException) return send400Error(res, err);
