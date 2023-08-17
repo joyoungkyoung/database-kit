@@ -1,5 +1,6 @@
 <script>
 import { AuthService } from '@/apis'
+import RoutesString from '@/routes/routesString'
 
 export default {
   data: () => ({
@@ -13,8 +14,11 @@ export default {
     async reqLogin() {
       const res = await AuthService.login(this.username, this.password)
       if (res.code === 200 && res.data) {
-        console.log(res.data.accessToken)
-        console.log(res.data.username)
+        const { username, accessToken } = res.data
+
+        this.$store.dispatch('user/setUser', { username, accessToken }).then(() => {
+          this.$router.push(RoutesString.Schema)
+        })
       }
     }
   }
