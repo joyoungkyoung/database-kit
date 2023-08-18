@@ -1,4 +1,4 @@
-import RoutesString from "@/routes/RoutesString";
+import RoutesString from "@/constants/RoutesString";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
