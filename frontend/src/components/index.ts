@@ -1,3 +1,5 @@
+import CustomHeader from "./CustomHeader";
 import FormInput from "./FormInput";
+import SideNav from "./SideNav";
 
-export { FormInput };
+export { FormInput, CustomHeader, SideNav };

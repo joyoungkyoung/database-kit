@@ -1,6 +1,9 @@
+import { CustomHeader } from "@/components";
 import RoutesString from "@/constants/RoutesString";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import NavWrapper from "./NavWrapper";
+import "./style.scss";
 
 export default function Home() {
     const location = useLocation();
@@ -10,5 +13,15 @@ export default function Home() {
         if (location.pathname === RoutesString.Home) navigate(RoutesString.Login);
     }, [location]);
 
-    return <Outlet />;
+    const hasHeader = location.pathname !== RoutesString.Login;
+    if (!hasHeader) return <Outlet />;
+
+    return (
+        <>
+            <CustomHeader />
+            <NavWrapper>
+                <Outlet />
+            </NavWrapper>
+        </>
+    );
 }
