@@ -68,8 +68,21 @@ $nav-width-open: 200px;
                 .MuiButtonBase-root {
                     min-height: 48px;
                     padding: 0 8px;
+                    &.active {
+                        .MuiListItemIcon-root {
+                            color: #3f50b5;
+                        }
+                        .MuiListItemText-root {
+                            color: #3f50b5;
+                            font-weight: bold;
+                        }
+                    }
                     .MuiListItemIcon-root {
                         justify-content: center;
+                        color: gray;
+                    }
+                    .MuiListItemText-root {
+                        color: gray;
                     }
                 }
             }

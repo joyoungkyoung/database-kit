@@ -5,9 +5,16 @@ import { useActiveBoolean } from "@/hooks";
 import classNames from "classnames";
 import NavItem from "./NavItem";
 import "./style.scss";
+import { RoutesPathType } from "@/constants/RoutesString";
+
+export type SideNavPathType = {
+    label: string;
+    to: RoutesPathType;
+    icon?: JSX.Element;
+};
 
 interface SideNavProps {
-    paths: any[];
+    paths: SideNavPathType[];
 }
 export default function SideNav({ paths }: SideNavProps) {
     const { active: open, toggleActive: toggleOpen } = useActiveBoolean();

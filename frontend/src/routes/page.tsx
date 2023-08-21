@@ -5,9 +5,8 @@ import NotFound404 from "@/pages/NotFound404";
 import SchemaList from "@/pages/SchemaList";
 import AuthGuard from "./AuthGuard";
 import AccountList from "@/pages/AccountList";
-import { ReactNode } from "react";
 
-function withAuthGuard(elem: ReactNode) {
+function withAuthGuard(elem: JSX.Element) {
     return <AuthGuard>{elem}</AuthGuard>;
 }
 
