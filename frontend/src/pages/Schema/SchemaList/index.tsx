@@ -1,11 +1,10 @@
 import { useGetSchemaListQuery } from "@/apis/service/schema.service";
-import { useAccessToken, useUsername } from "@/stores/user";
+import { useAccessToken, useUsername } from "@/stores/auth";
 import { Box, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import SchemaCard from "./SchemaCard";
-
-import "./style.scss";
 import { Text } from "@/components";
+import "./style.scss";
 
 export default function SchemaList() {
     const [keyword, setKeyword] = useState<string>("");

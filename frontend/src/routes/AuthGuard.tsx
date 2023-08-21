@@ -1,5 +1,5 @@
 import RoutesString from "@/constants/RoutesString";
-import { useAccessToken } from "@/stores/user";
+import { useAccessToken } from "@/stores/auth";
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 

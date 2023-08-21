@@ -9,4 +9,6 @@ interface ResGetSchemaList extends BaseResponse {
     }[];
 }
 
-export type { ResGetSchemaList };
+interface ResRemoveSchema extends BaseResponse {}
+
+export type { ResGetSchemaList, ResRemoveSchema };

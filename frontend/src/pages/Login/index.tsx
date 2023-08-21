@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./login.schema";
 import { FormInput } from "@/components";
 import { useLoginMutation } from "@/apis/service/auth.service";
-import { useUserActions } from "@/stores/user";
+import { useAuthActions } from "@/stores/auth";
 import { useNavigate } from "react-router-dom";
 import RoutesString from "@/constants/RoutesString";
 
@@ -18,19 +18,19 @@ export default function Login() {
         },
     });
     const { mutateAsync: reqLogin } = useLoginMutation();
-    const { setUser } = useUserActions();
+    const { setAuth } = useAuthActions();
     const navigate = useNavigate();
 
     const onSubmit = (data: any) => {
         reqLogin(data)
             .then(({ data: { code, data } }) => {
                 if (code === 200) {
-                    setUser(data.username, data.accessToken);
+                    setAuth(data.username, data.accessToken);
                     navigate(RoutesString.Schema);
                 }
             })
             .catch((e) => {
-                alert(e.response.data?.message);
+                console.error(e);
             });
     };
     return (

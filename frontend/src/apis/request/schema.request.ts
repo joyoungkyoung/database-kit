@@ -1,3 +1,6 @@
 interface ReqGetSchemaList {}
 
-export type { ReqGetSchemaList };
+interface ReqRemoveSchema {
+    _id: string;
+}
+export type { ReqGetSchemaList, ReqRemoveSchema };
