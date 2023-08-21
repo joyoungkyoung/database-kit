@@ -15,6 +15,19 @@ const getList = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+const getItemList = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const dto = { id };
+    const schemaService = Container.get(SchemaService);
+
+    try {
+        const response = await schemaService.getItemList(dto);
+        return send200(res, response);
+    } catch (e: any) {
+        next(e);
+    }
+};
+
 const create = async (req: Request, res: Response, next: NextFunction) => {
     const dto = req.body;
     const schemaService = Container.get(SchemaService);
@@ -101,6 +114,7 @@ const deleteSchema = async (req: Request, res: Response, next: NextFunction) => 
 
 export default {
     getList,
+    getItemList,
     create,
     addRow,
     getRow,

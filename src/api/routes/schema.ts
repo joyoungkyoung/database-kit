@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", verifyToken(), controller.getList);
 router.post("/", verifyToken(), controller.create);
+router.get("/:id", verifyToken(), controller.getItemList)
 router.post("/row", verifyToken(), controller.addRow);
 router.get("/row", verifyToken(), controller.getRow);
 router.put("/row", verifyToken(), controller.updateRow);

@@ -17,8 +17,8 @@ export default class SchemaService {
      * @param dto
      * @returns
      */
-    public async getList(dto: { sort?: number }) {
-        const { sort } = dto;
+    public async getList(dto: { keyword?: string; sort?: number }) {
+        const { keyword, sort } = dto;
 
         let sortCond: any = {};
         switch (sort) {
@@ -28,7 +28,34 @@ export default class SchemaService {
                 break;
         }
 
-        const list = await SchemaModel.find({ deletedAt: { $exists: false } }).sort({ ...sortCond });
+        const filterCond: any = { deletedAt: { $exists: false } };
+
+        if (keyword) {
+            filterCond.name = new RegExp(keyword);
+        }
+
+        const list = await SchemaModel.find({ ...filterCond }).sort({ ...sortCond });
+
+        return list;
+    }
+
+    /**
+     * 스키마 1개에 해당하는 rows 조회
+     * @param dto
+     * @returns
+     */
+    public async getItemList(dto: { id: string; sort?: number }) {
+        const { id, sort } = dto;
+
+        let sortCond: any = {};
+        switch (sort) {
+            case 1:
+            default:
+                sortCond = { id: 1 };
+                break;
+        }
+
+        const list = await SchemaValueModel.find({ schemaId: new ObjectId(id) }).sort({ ...sortCond });
 
         return list;
     }
