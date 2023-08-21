@@ -1,0 +1,15 @@
+.schema-container {
+    padding-top: 40px;
+    .search-wrapper {
+        margin-bottom: 40px;
+    }
+    .schema-card-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+
+        .schema-card {
+            border-radius: 4px;
+        }
+    }
+}
