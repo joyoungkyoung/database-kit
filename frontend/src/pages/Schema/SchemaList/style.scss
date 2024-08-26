@@ -2,6 +2,11 @@
     padding-top: 40px;
     .search-wrapper {
         margin-bottom: 40px;
+        .absolute-right-bottom {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+        }
     }
     .schema-card-list {
         display: grid;

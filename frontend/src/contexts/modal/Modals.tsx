@@ -4,6 +4,7 @@ import { ModalDispatchContext, ModalStateContext } from "./ModalContext";
 
 export const modals = {
     TwoButtonModal: loadable(() => import("@/components/Modals/TwoButtonModal")),
+    SchemaModal: loadable(() => import("@/components/Modals/SchemaModal")),
 };
 
 export type ModalList = keyof typeof modals;

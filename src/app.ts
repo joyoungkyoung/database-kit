@@ -1,16 +1,14 @@
-import express from "express";
 import { configInfo } from "@config";
 import loaders from "@loaders";
+import "reflect-metadata";
 
 async function startServer() {
-    const app = express();
-    const port = configInfo.PORT;
+  const port = configInfo.PORT;
+  const app = await loaders.init();
 
-    await loaders.init(app);
-
-    app.listen(port, async () => {
-        console.log(`Example app listening on port ${port}`);
-    });
+  app.listen(port, async () => {
+    console.log(`Example app listening on port ${port}`);
+  });
 }
 
 startServer();
